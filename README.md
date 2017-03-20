@@ -1,2 +1,3 @@
-# typed-states
-An extension of the Amazon States Language that includes static typing and validation.
+# stateslang-js
+
+A javascript implementation of the Amazon States Language
