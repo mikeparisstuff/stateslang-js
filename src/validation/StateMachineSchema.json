@@ -1,0 +1,256 @@
+{
+  "id": "StateMachine",
+  "type": "object",
+  "required": [
+    "States",
+    "StartAt"
+  ],
+  "properties": {
+    "States": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-zA-Z0-9_]+$": {
+          "type": "object",
+          "oneOf": [
+            { "$ref": "#/definitions/TaskState" },
+            { "$ref": "#/definitions/WaitState" },
+            { "$ref": "#/definitions/PassState"},
+            { "$ref": "#/definitions/SucceedState"},
+            { "$ref": "#/definitions/FailState"}
+          ]
+        }
+      }
+    },
+    "StartAt": {
+      "type": "string"
+    },
+    "Comment": {
+      "type": "string"
+    },
+    "Version": {
+      "type": "string"
+    },
+    "TimeoutSeconds": {
+      "type": "integer",
+      "minimum": 0,
+      "maxiumum": 99999999
+    }
+  },
+  "definitions": {
+    "TaskState": {
+      "required": [
+        "Type",
+        "Resource"
+      ],
+      "oneOf": [
+        { "required": [ "End" ] },
+        { "required": [ "Next" ] }
+      ],
+      "properties": {
+        "Type": {
+          "enum": [ "Task" ]
+        },
+        "Resource": {
+          "type": "string"
+        },
+        "TimeoutSeconds": {
+          "type": "number",
+          "minimum": 0,
+          "maxiumum": 99999999
+        },
+        "HeartbeatSeconds": {
+          "type": "number",
+          "minimum": 0,
+          "maxiumum": 99999999
+        },
+        "Comment": {
+          "type": "string"
+        },
+        "End": {
+          "type": "boolean"
+        },
+        "Next": {
+          "type": "string"
+        },
+        "Catch": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Catcher" }
+        },
+        "Retry": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Retrier" }
+        },
+        "InputPath": {
+          "type": "string"
+        },
+        "ResultPath": {
+          "type": "string"
+        },
+        "OutputPath": {
+          "type": "string"
+        }
+      }
+    },
+    "WaitState": {
+      "required": [
+        "Type"
+      ],
+      "oneOf": [
+        { "required": [ "Seconds" ] },
+        { "required": [ "Timestamp" ] },
+        { "required": [ "TimestampPath" ] }
+      ],
+      "properties": {
+        "Type": {
+          "enum": [ "Wait" ]
+        },
+        "Comment": {
+          "type": "string"
+        },
+        "End": {
+          "type": "boolean"
+        },
+        "Next": {
+          "type": "string"
+        },
+        "InputPath": {
+          "type": "string"
+        },
+        "OutputPath": {
+          "type": "string"
+        },
+        "Seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maxiumum": 99999999
+        },
+        "Timestamp": {
+          "type": "string"
+        },
+        "TimestampPath": {
+          "type": "string"
+        }
+      }
+    },
+    "PassState": {
+      "required": [
+        "Type"
+      ],
+      "oneOf": [
+        { "required": [ "End" ] },
+        { "required": [ "Next" ] }
+      ],
+      "properties": {
+        "Type": {
+          "enum": [ "Pass" ]
+        },
+        "Comment": {
+          "type": "string"
+        },
+        "End": {
+          "type": "string"
+        },
+        "Next": {
+          "type": "string"
+        },
+        "Result": {
+          "type": "object"
+        },
+        "InputPath": {
+          "type": "string"
+        },
+        "ResultPath": {
+          "type": "string"
+        },
+        "OutputPath": {
+          "type": "string"
+        }
+      }
+    },
+    "SucceedState": {
+      "required": [
+        "Type"
+      ],
+      "properties": {
+        "Type": {
+          "enum": [ "Succeed" ]
+        },
+        "Comment": {
+          "type": "string"
+        },
+        "InputPath": {
+          "type": "string"
+        },
+        "OutputPath": {
+          "type": "string"
+        }
+      }
+    },
+    "FailState": {
+      "required": [
+        "Type"
+      ],
+      "properties": {
+        "Type": {
+          "enum": [ "Fail" ]
+        },
+        "Cause": {
+          "type": "string"
+        },
+        "Error": {
+          "type": "string"
+        },
+        "Comment": {
+          "type": "string"
+        }
+      }
+    },
+    "Retrier": {
+      "required": [
+        "ErrorEquals"
+      ],
+      "properties": {
+        "ErrorEquals": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "IntervalSeconds": {
+          "type": "number",
+          "minimum": 1,
+          "maxiumum": 99999999
+        },
+        "MaxAttempts": {
+          "type": "integer",
+          "minimum": 0,
+          "maxiumum": 99999999
+        },
+        "BackoffRate": {
+          "type": "number",
+          "minimum": 1.0
+        }
+      }
+    },
+    "Catcher": {
+      "required": [
+        "ErrorEquals",
+        "Next"
+      ],
+      "properties": {
+        "ErrorEquals": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Next": {
+          "type": "string"
+        },
+        "ResultPath": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
