@@ -1,39 +1,73 @@
-import IWaitState from './interface/IWaitState';
-import BaseState from './BaseState';
-import StateMachine from '../StateMachine';
-import { noop } from '../utils';
+import IWaitState from './interface/IWaitState'
+import BaseState from './BaseState'
+import StateMachine from '../StateMachine'
+import { applyInputPath } from '../utils'
+const debug = require('debug')('WaitState')
 
 export default class WaitState<Context> extends BaseState<Context> implements IWaitState {
 
-  Type: 'Wait';
+  public Type: 'Wait'
 
-  Next?: string;
+  public Next?: string
 
-  End?: boolean;
+  public End?: boolean
 
-  Comment?: string;
+  public Comment?: string
 
-  Resource: string;
+  public Resource: string
 
-  InputPath?: string;
+  public InputPath?: string
 
-  OutputPath?: string;
+  public OutputPath?: string
 
-  Seconds?: number;
+  public Seconds?: number
 
-  Timestamp?: Timestamp;
+  public Timestamp?: Timestamp
 
-  SecondsPath?: string;
+  public SecondsPath?: string
 
-  TimestampPath?: string;
+  public TimestampPath?: string
 
-  constructor(state: IWaitState) {
-    super();
-    Object.assign(this, state);
+  constructor(sm: StateMachine<Context>, state: IWaitState) {
+    super(sm)
+    Object.assign(this, state)
   }
 
-  execute(input: mixed, context: Context, sm: StateMachine<Context>): Promise<mixed> {
-    noop(input, context, sm);
-    throw new Error('Not Implemented');
+  private getTimeout(input: mixed) {
+    if (this.Seconds) {
+      return this.Seconds * 1000
+    }
+    if (this.Timestamp) {
+      const waitTill = new Date(this.Timestamp)
+      return waitTill.getTime() - Date.now()
+    }
+    if (this.SecondsPath) {
+      return applyInputPath(input, this.SecondsPath) * 1000
+    }
+    if (this.TimestampPath) {
+      const waitTillTimestamp = applyInputPath(input, this.TimestampPath)
+      const waitTill = new Date(waitTillTimestamp)
+      return waitTill.getTime() - Date.now()
+    }
+    throw new Error('Could not parse duration for wait state')
+  }
+
+  public async execute(input: mixed, context: Context): Promise<mixed> {
+    const waittime = this.getTimeout(input)
+    const that = this
+    debug(`Wait State waiting for ${waittime} ms`)
+    return new Promise<mixed>(
+      (
+        resolve: (value?: mixed | PromiseLike<mixed> | undefined) => void,
+        reject: (reason?: any) => void
+      ) => {
+        setTimeout(() => {
+          try {
+            return resolve(that.gotoNextState(input, context))
+          } catch (e) {
+            reject(e)
+          }
+        }, waittime)
+      })
   }
 }

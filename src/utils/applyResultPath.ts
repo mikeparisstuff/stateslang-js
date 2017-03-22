@@ -1,4 +1,5 @@
 const set = require('lodash.set');
+const get = require('lodash.get');
 
 /**
  * https://docs.aws.amazon.com/step-functions/latest/dg/awl-ref-filters.html
@@ -16,5 +17,6 @@ export default function applyResultPath(
   const wrappedInput = {
     '$': input,
   };
-  return set(wrappedInput, resultPath, result);
+  set(wrappedInput, resultPath, result);
+  return get(wrappedInput, '$');
 }

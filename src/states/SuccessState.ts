@@ -1,13 +1,19 @@
-import BaseState from './BaseState';
-import StateMachine from '../StateMachine';
-import noop from '../utils/noop';
+import BaseState from './BaseState'
+import StateMachine from '../StateMachine'
+import noop from '../utils/noop'
+const debug = require('debug')('SuccessState')
 
 export default class SuccessState<Context> extends BaseState<Context> {
 
-  Type: 'Succeed';
+  public Type: 'Succeed'
 
-  execute(input: mixed, context: Context, sm: StateMachine<Context>): Promise<mixed> {
-    noop(input, context, sm);
-    return Promise.resolve(input);
+  constructor(stateMachine: StateMachine<Context>) {
+    super(stateMachine)
+  }
+
+  public execute(input: mixed, context: Context): Promise<mixed> {
+    debug('Reached success state')
+    noop(context)
+    return Promise.resolve(input)
   }
 }

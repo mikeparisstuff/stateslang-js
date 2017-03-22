@@ -1,16 +1,16 @@
-import IRetrier from './interface/IRetrier';
+import IRetrier from './interface/IRetrier'
 
 export default class Retrier implements IRetrier {
 
-  ErrorEquals: string[];
+  public ErrorEquals: string[]
 
-  IntervalSeconds?: number;
+  public IntervalSeconds?: number
 
-  MaxAttempts?: number;
+  public MaxAttempts?: number
 
-  BackoffRate?: number;
+  public BackoffRate?: number
 
   constructor(retrier: IRetrier) {
-    Object.assign(this, retrier);
+    Object.assign(this, retrier)
   }
 }

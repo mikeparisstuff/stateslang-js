@@ -1,12 +1,12 @@
 class StateError extends Error {
 
-  cause: string;
+  public cause: string
 
   constructor(cause: string, error: string) {
-    super(error);
-    this.name = 'StateError';
-    this.cause = cause;
+    super(error)
+    this.name = 'StateError'
+    this.cause = cause
   }
 }
 
-export default StateError;
+export default StateError

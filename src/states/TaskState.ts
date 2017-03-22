@@ -1,51 +1,51 @@
-import ITaskState from './interface/ITaskState';
-import IRetrier from './interface/IRetrier';
-import Catcher from './interface/ICatcher';
-import BaseState from './BaseState';
-import StateMachine from '../StateMachine';
+import ITaskState from './interface/ITaskState'
+import IRetrier from './interface/IRetrier'
+import Catcher from './interface/ICatcher'
+import BaseState from './BaseState'
+import StateMachine from '../StateMachine'
 import {
   applyInputPath,
   applyOutputPath,
   applyResultPath
-} from '../utils';
+} from '../utils'
 
 export default class TaskState<Context> extends BaseState<Context> implements ITaskState {
 
-  Type: 'Task';
+  public Type: 'Task'
 
-  Next?: string;
+  public Next?: string
 
-  End?: boolean;
+  public End?: boolean
 
-  Comment?: string;
+  public Comment?: string
 
-  Resource: string;
+  public Resource: string
 
-  InputPath?: string;
+  public InputPath?: string
 
-  OutputPath?: string;
+  public OutputPath?: string
 
-  ResultPath?: string;
+  public ResultPath?: string
 
-  Retry?: IRetrier[];
+  public Retry?: IRetrier[]
 
-  Catch?: Catcher[];
+  public Catch?: Catcher[]
 
-  TimeoutSeconds?: number;
+  public TimeoutSeconds?: number
 
-  HeartbeatSeconds?: number;
+  public HeartbeatSeconds?: number
 
-  constructor(state: ITaskState) {
-    super();
-    Object.assign(this, state);
+  constructor(stateMachine: StateMachine<Context>, state: ITaskState) {
+    super(stateMachine)
+    Object.assign(this, state)
   }
 
-  async execute(input: mixed, context: Context, sm: StateMachine<Context>) : Promise<mixed> {
-    const filteredInput = applyInputPath(input, this.InputPath);
-    const resource = sm!.getResource(this.Resource);
-    const result = await resource(filteredInput, context, sm);
-    const filteredResult = applyResultPath(input, result, this.ResultPath);
-    const filteredOutput = applyOutputPath(filteredResult, this.OutputPath);
-    return filteredOutput;
+  public async execute(input: mixed, context: Context) : Promise<mixed> {
+    const filteredInput = applyInputPath(input, this.InputPath)
+    const resource = this.stateMachine.getResource(this.Resource)
+    const result = await resource(filteredInput, context, this.stateMachine)
+    const filteredResult = applyResultPath(input, result, this.ResultPath)
+    const filteredOutput = applyOutputPath(filteredResult, this.OutputPath)
+    return this.gotoNextState(filteredOutput, context)
   }
 }

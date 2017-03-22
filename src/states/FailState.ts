@@ -1,30 +1,33 @@
 import IFailState from './interface/IFailState';
 import IExecutable from './interface/IExecutable';
 import StateError from './StateError';
+import BaseState from './BaseState';
+import StateMachine from '../StateMachine';
 
-export default class FailState<Context> implements IFailState, IExecutable<Context> {
+export default class FailState<Context> extends BaseState<Context> implements IFailState, IExecutable<Context> {
 
-  Type: 'Fail';
+  public Type: 'Fail'
 
-  Next?: string;
+  public Next?: string
 
-  End?: boolean;
+  public End?: boolean
 
-  Comment?: string;
+  public Comment?: string
 
-  InputPath?: string;
+  public InputPath?: string
 
-  OutputPath?: string;
+  public OutputPath?: string
 
-  Cause: string;
+  public Cause: string
 
-  Error: string;
+  public Error: string
 
-  constructor(state: IFailState) {
-    Object.assign(this, state);
+  constructor(stateMachine: StateMachine<Context>, state: IFailState) {
+    super(stateMachine)
+    Object.assign(this, state)
   }
 
   execute(): Promise<mixed> {
-    throw new StateError(this.Cause, this.Error);
+    return Promise.reject(new StateError(this.Cause, this.Error))
   }
 }

@@ -1,38 +1,39 @@
-import IPassState from './interface/IPassState';
-import BaseState from './BaseState';
+import IPassState from './interface/IPassState'
+import BaseState from './BaseState'
+import StateMachine from '../StateMachine'
 import {
   applyInputPath,
   applyOutputPath,
   applyResultPath,
-} from '../utils';
+} from '../utils'
 
 export default class PassState<Context> extends BaseState<Context> implements IPassState {
 
-  Type: 'Pass';
+  public Type: 'Pass'
 
-  Next?: string;
+  public Next?: string
 
-  End?: boolean;
+  public End?: boolean
 
-  Comment?: string;
+  public Comment?: string
 
-  InputPath?: string;
+  public InputPath?: string
 
-  OutputPath?: string;
+  public OutputPath?: string
 
-  Result?: any;
+  public Result?: mixed
 
-  ResultPath?: string;
+  public ResultPath?: string
 
-  constructor(state: IPassState) {
-    super();
-    Object.assign(this, state);
+  constructor(stateMachine: StateMachine<Context>, state: IPassState) {
+    super(stateMachine)
+    Object.assign(this, state)
   }
 
-  execute(input: mixed) : Promise<mixed> {
-    const filteredInput = applyInputPath(input, this.InputPath);
-    const filteredResult = applyResultPath(filteredInput, this.Result, this.ResultPath);
-    const filteredOutput = applyOutputPath(filteredResult, this.OutputPath);
-    return filteredOutput;
+  public execute(input: mixed, context: Context): Promise<mixed> {
+    const filteredInput = applyInputPath(input, this.InputPath)
+    const filteredResult = applyResultPath(filteredInput, this.Result, this.ResultPath)
+    const filteredOutput = applyOutputPath(filteredResult, this.OutputPath)
+    return this.gotoNextState(filteredOutput, context)
   }
 }

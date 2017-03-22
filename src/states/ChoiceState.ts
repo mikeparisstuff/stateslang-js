@@ -1,32 +1,33 @@
 import IChoiceState, { ChoiceRule } from './interface/IChoiceState';
 import BaseState from './BaseState';
+import StateMachine from '../StateMachine';
 
 export default class ChoiceState<Context>
   extends BaseState<Context>
   implements IChoiceState {
 
-  Type: 'Choice';
+  public Type: 'Choice'
 
-  Next?: string;
+  public Next?: string
 
-  End?: boolean;
+  public End?: boolean
 
-  Comment?: string;
+  public Comment?: string
 
-  InputPath?: string;
+  public InputPath?: string
 
-  OutputPath?: string;
+  public OutputPath?: string
 
-  Choices: ChoiceRule[];
+  public Choices: ChoiceRule[]
 
-  Default: string;
+  public Default: string
 
-  constructor(state: IChoiceState) {
-    super();
-    Object.assign(this, state);
+  constructor(stateMachine: StateMachine<Context>, state: IChoiceState) {
+    super(stateMachine)
+    Object.assign(this, state)
   }
 
   execute(input: mixed): Promise<mixed> {
-    return Promise.resolve(input);
+    return Promise.resolve(input)
   }
 }
