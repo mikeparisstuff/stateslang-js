@@ -55,11 +55,12 @@ export default class WaitState<Context> extends BaseState<Context> implements IW
   public async execute(input: mixed, context: Context): Promise<mixed> {
     const waittime = this.getTimeout(input)
     const that = this
+    console.log(`WaitTill: ${waittime}`);
     debug(`Wait State waiting for ${waittime} ms`)
     return new Promise<mixed>(
       (
         resolve: (value?: mixed | PromiseLike<mixed> | undefined) => void,
-        reject: (reason?: any) => void
+        reject: (reason?: mixed) => void
       ) => {
         setTimeout(() => {
           try {

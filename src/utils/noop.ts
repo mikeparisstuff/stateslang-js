@@ -1,3 +1,3 @@
-export default function noop(...args: any[]) {
-  return args;
+export default function noop(...args: mixed[]) {
+  return args
 }

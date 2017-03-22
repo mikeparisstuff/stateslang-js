@@ -1,14 +1,14 @@
-import ICatcher from './interface/ICatcher';
+import ICatcher from './interface/ICatcher'
 
 export default class Catcher implements ICatcher {
 
-  ErrorEquals: string[];
+  public ErrorEquals: string[]
 
-  Next: string;
+  public Next: string
 
-  ResultPath?: string;
+  public ResultPath?: string
 
   constructor(catcher: ICatcher) {
-    Object.assign(this, catcher);
+    Object.assign(this, catcher)
   }
 }
