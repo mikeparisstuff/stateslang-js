@@ -21,8 +21,8 @@ it('should run the state machine and transform the value through task', async ()
   const e = new StateMachine<BlankObject>({
     stateMachine: taskMachine,
     resources: {
-      ReturnWorld(input: mixed, context: BlankObject, stateMachine: StateMachine<BlankObject>) {
-        noop(input, context, stateMachine)
+      ReturnWorld(input: mixed, context: BlankObject): Promise<mixed> {
+        noop(input, context)
         return Promise.resolve('World')
       },
     },
@@ -38,8 +38,8 @@ it('should run the state machine and grab the value through task from context', 
   const e = new StateMachine<{ Hello: 'World' }>({
     stateMachine: taskMachine,
     resources: {
-      ReturnWorld(input: mixed, context: { Hello: 'World' }, stateMachine: StateMachine<BlankObject>) {
-        noop(input, stateMachine)
+      ReturnWorld(input: mixed, context: { Hello: 'World' }): Promise<mixed> {
+        noop(input)
         return Promise.resolve(context.Hello)
       },
     },

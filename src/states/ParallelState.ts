@@ -35,8 +35,8 @@ export default class ParallelState<Context> extends BaseState<Context> {
    */
   public Catch?: Catcher[]
 
-  constructor(stateMachine: StateMachine<Context>, state: IParallelState) {
-    super(stateMachine)
+  constructor(name: string, state: IParallelState) {
+    super(name)
     Object.assign(this, state)
   }
 

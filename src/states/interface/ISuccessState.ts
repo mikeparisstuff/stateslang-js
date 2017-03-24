@@ -5,7 +5,7 @@
  * useful target for Choice state branches that don't do anything but stop the execution.
  */
 interface ISuccessState {
-  Type: 'Succeed';
+  Type: 'Succeed'
 }
 
-export default ISuccessState;
+export default ISuccessState

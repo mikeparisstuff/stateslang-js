@@ -39,31 +39,39 @@ export default class StateMachine<Context> {
     this.StartAt = stateMachine.StartAt
     this.TimeoutSeconds = stateMachine.TimeoutSeconds
     this.Version = stateMachine.Version
-    this.States = Object.keys(stateMachine.States).reduce((acc: any, key: string) => ({
+    const factory = new StateFactory({
+      stateMachine,
+      resources,
+    });
+    this.States = Object.keys(stateMachine.States).reduce((
+      acc: {[name: string]: BaseState<Context>},
+      key: string
+    ) => ({
       ...acc,
-      [key]: StateFactory<Context>(this, stateMachine.States[key])
+      [key]: factory.getState(key),
     }), {})
   }
 
-  getResource(resource: string) {
+  public getResource(resource: string): ResourceFn<Context> {
     if (!this.resources[resource]) {
       throw new Error(`State machine does not contain a resource with name: ${resource}`)
     }
     return this.resources[resource]
   }
 
-  getState(state: string) {
+  public getState(state: string): BaseState<Context> {
     if (!this.States[state]) {
       throw new Error(`State machine does not contain a State with name: ${state}`)
     }
     return this.States[state]
   }
 
-  validate() {
+  public validate(): boolean {
     debug('Validating State Machine', this)
+    return true;
   }
 
-  execute(input: mixed) : Promise<mixed> {
+  public execute(input: mixed): Promise<mixed> {
     debug('Executing State Machine')
     const first = this.States[this.StartAt]
     return first.execute(input, this.context)

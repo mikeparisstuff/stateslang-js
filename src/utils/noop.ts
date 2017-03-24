@@ -1,3 +1,3 @@
-export default function noop(...args: mixed[]) {
+export default function noop(...args: mixed[]): mixed[] {
   return args
 }

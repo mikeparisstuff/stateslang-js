@@ -1,10 +1,10 @@
-import PassState from './PassState';
-import ParallelState from './ParallelState';
-import ChoiceState from './ChoiceState';
-import FailState from './FailState';
-import SuccessState from './SuccessState';
-import TaskState from './TaskState';
-import WaitState from './WaitState';
+import PassState from './PassState'
+import ParallelState from './ParallelState'
+import ChoiceState from './ChoiceState'
+import FailState from './FailState'
+import SuccessState from './SuccessState'
+import TaskState from './TaskState'
+import WaitState from './WaitState'
 
 type State<Context> =
   TaskState<Context> |
@@ -13,6 +13,6 @@ type State<Context> =
   ChoiceState<Context> |
   ParallelState<Context> |
   PassState<Context> |
-  WaitState<Context>;
+  WaitState<Context>
 
-export default State;
+export default State

@@ -14,26 +14,26 @@ interface IRetrier {
    * - States.TaskFailed: A Task state failed during the execution.
    * - States.Permissions: A Task state failed because it had insufficient privileges to execute the specified code.
    */
-  ErrorEquals: string[];
+  ErrorEquals: string[]
 
   /**
    * An integer that represents the number of seconds before the first retry attempt (default 1).
    * [Optional]
    */
-  IntervalSeconds?: number;
+  IntervalSeconds?: number
 
   /**
    * A positive integer, representing the maximum number of retry attempts (default 3). If the error
    * recurs more times than specified, retries cease and normal error handling resumes. A value of 0
    * is permitted and indicates that the error or errors should never be retried. [Optional]
    */
-  MaxAttempts?: number;
+  MaxAttempts?: number
 
   /**
    * A number that is the multiplier by which the retry interval increases on each attempt
    * (default 2.0). [Optional]
    */
-  BackoffRate?: number;
+  BackoffRate?: number
 }
 
-export default IRetrier;
+export default IRetrier

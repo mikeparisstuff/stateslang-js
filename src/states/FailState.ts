@@ -1,33 +1,24 @@
-import IFailState from './interface/IFailState';
-import IExecutable from './interface/IExecutable';
-import StateError from './StateError';
-import BaseState from './BaseState';
-import StateMachine from '../StateMachine';
+import IFailState from './interface/IFailState'
+import IExecutable from './interface/IExecutable'
+import StateError from './StateError'
+import BaseState from './BaseState'
+const debug = require('debug')('FailState')
 
-export default class FailState<Context> extends BaseState<Context> implements IFailState, IExecutable<Context> {
+export default class FailState<Context> extends BaseState<Context> implements IExecutable<Context> {
 
   public Type: 'Fail'
-
-  public Next?: string
-
-  public End?: boolean
-
-  public Comment?: string
-
-  public InputPath?: string
-
-  public OutputPath?: string
 
   public Cause: string
 
   public Error: string
 
-  constructor(stateMachine: StateMachine<Context>, state: IFailState) {
-    super(stateMachine)
+  constructor(name: string, state: IFailState) {
+    super(name)
     Object.assign(this, state)
   }
 
-  execute(): Promise<mixed> {
+  public execute(): Promise<mixed> {
+    debug(`FailState '${this.Name}' hit with cause '${this.Cause}' and error: '${this.Error}'`)
     return Promise.reject(new StateError(this.Cause, this.Error))
   }
 }

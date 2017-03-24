@@ -1,17 +1,18 @@
 import IPassState from './interface/IPassState'
 import BaseState from './BaseState'
-import StateMachine from '../StateMachine'
 import {
   applyInputPath,
   applyOutputPath,
   applyResultPath,
 } from '../utils'
 
-export default class PassState<Context> extends BaseState<Context> implements IPassState {
+export default class PassState<Context> extends BaseState<Context> {
 
   public Type: 'Pass'
 
   public Next?: string
+
+  protected NextState?: BaseState<Context>
 
   public End?: boolean
 
@@ -25,8 +26,8 @@ export default class PassState<Context> extends BaseState<Context> implements IP
 
   public ResultPath?: string
 
-  constructor(stateMachine: StateMachine<Context>, state: IPassState) {
-    super(stateMachine)
+  constructor(name: string, state: IPassState) {
+    super(name)
     Object.assign(this, state)
   }
 

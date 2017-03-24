@@ -1,14 +1,15 @@
 import IWaitState from './interface/IWaitState'
 import BaseState from './BaseState'
-import StateMachine from '../StateMachine'
 import { applyInputPath } from '../utils'
 const debug = require('debug')('WaitState')
 
-export default class WaitState<Context> extends BaseState<Context> implements IWaitState {
+export default class WaitState<Context> extends BaseState<Context> {
 
   public Type: 'Wait'
 
   public Next?: string
+
+  protected NextState?: BaseState<Context>
 
   public End?: boolean
 
@@ -28,8 +29,8 @@ export default class WaitState<Context> extends BaseState<Context> implements IW
 
   public TimestampPath?: string
 
-  constructor(sm: StateMachine<Context>, state: IWaitState) {
-    super(sm)
+  constructor(name: string, state: IWaitState) {
+    super(name)
     Object.assign(this, state)
   }
 
@@ -55,12 +56,11 @@ export default class WaitState<Context> extends BaseState<Context> implements IW
   public async execute(input: mixed, context: Context): Promise<mixed> {
     const waittime = this.getTimeout(input)
     const that = this
-    console.log(`WaitTill: ${waittime}`);
-    debug(`Wait State waiting for ${waittime} ms`)
+    debug(`WaitState waiting for ${waittime} ms`)
     return new Promise<mixed>(
       (
         resolve: (value?: mixed | PromiseLike<mixed> | undefined) => void,
-        reject: (reason?: mixed) => void
+        reject: (reason?: mixed) => void,
       ) => {
         setTimeout(() => {
           try {

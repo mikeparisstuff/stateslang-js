@@ -1,4 +1,4 @@
-import IBaseState from './IBaseState';
+import IBaseState from './IBaseState'
 
 /**
  * https://docs.aws.amazon.com/step-functions/latest/dg/awl-ref-states-fail.html
@@ -11,19 +11,19 @@ import IBaseState from './IBaseState';
  */
 interface IFailState extends IBaseState {
 
-  Type: 'Fail';
+  Type: 'Fail'
 
   /**
    * Provides a custom failure string that can be used for operational or diagnostic purposes.
    * [Optional]
    */
-  Cause: string;
+  Cause: string
 
   /**
    * Provides an error name that can be used for error handling (Retry/Catch),
    * operational or diagnostic purposes. [Optional]
    */
-  Error: string;
+  Error: string
 }
 
-export default IFailState;
+export default IFailState

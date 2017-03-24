@@ -1,4 +1,4 @@
-import IBaseState from './IBaseState';
+import IBaseState from './IBaseState'
 
 /**
  * https://docs.aws.amazon.com/step-functions/latest/dg/awl-ref-states-wait.html
@@ -9,12 +9,12 @@ import IBaseState from './IBaseState';
  */
 interface IWaitState extends IBaseState {
 
-  Type: 'Wait';
+  Type: 'Wait'
 
   /**
    * A time, in seconds, to wait before beginning the state specified in the Next field.
    */
-  Seconds?: number;
+  Seconds?: number
 
   /**
    * An absolute time to wait until before beginning the state specified in the Next field.
@@ -22,19 +22,19 @@ interface IWaitState extends IBaseState {
    * that an uppercase "T" must be used to separate the date and time portions, and an uppercase
    * "Z" must be used if no numeric time zone offset is present, e.g. "2016-08-18T17:33:00Z".
    */
-  Timestamp?: Timestamp;
+  Timestamp?: Timestamp
 
   /**
    * A time, in seconds, to wait before beginning the state specified in the Next field,
    * specified using a path from the state's input data.
    */
-  SecondsPath?: string;
+  SecondsPath?: string
 
   /**
    * An absolute time to wait until before beginning the state specified in the Next field,
    * specified using a path from the state's input data.
    */
-  TimestampPath?: string;
+  TimestampPath?: string
 }
 
-export default IWaitState;
+export default IWaitState

@@ -1,4 +1,4 @@
-import IBaseState from './IBaseState';
+import IBaseState from './IBaseState'
 
 /**
  * https://docs.aws.amazon.com/step-functions/latest/dg/awl-ref-states-choice.html
@@ -7,19 +7,19 @@ import IBaseState from './IBaseState';
  */
 interface IChoiceState extends IBaseState {
 
-  Type: 'Choice';
+  Type: 'Choice'
 
   /**
    * An array of Choice Rules that determine which state the state machine transitions to next.
    * [Required]
    */
-  Choices: ChoiceRule[];
+  Choices: ChoiceRule[]
 
   /**
    * The name of a state to transition to if none of the transitions in Choices is taken.
    * [Optional, but recommended]
    */
-  Default: string;
+  Default: string
 }
 
 /**
@@ -30,15 +30,35 @@ interface IChoiceState extends IBaseState {
  */
 export interface ChoiceRule extends ChoiceRuleCondition {
 
-  Next: string;
+  Next: string
 
 }
 
-interface ChoiceRuleCondition extends ChoiceRuleOperators {
+export interface ChoiceRuleCondition extends ChoiceRuleOperators {
 
-  Variable: string;
+  Variable?: string
 
 }
+
+export type RuleOperator = 'StringEquals'
+  | 'StringLessThan'
+  | 'StringGreaterThan'
+  | 'StringLessThanEquals'
+  | 'StringGreaterThanEquals'
+  | 'NumericEquals'
+  | 'NumericLessThan'
+  | 'NumericGreaterThan'
+  | 'NumericLessThanEquals'
+  | 'NumericGreaterThanEquals'
+  | 'BooleanEquals'
+  | 'TimestampEquals'
+  | 'TimestampLessThan'
+  | 'TimestampGreaterThan'
+  | 'TimestampLessThanEquals'
+  | 'TimestampGreaterThanEquals'
+  | 'And'
+  | 'Or'
+  | 'Not'
 
 /**
  * For each of these operators, the corresponding value must be of the appropriate type: String,
@@ -48,43 +68,43 @@ interface ChoiceRuleCondition extends ChoiceRuleOperators {
  */
 interface ChoiceRuleOperators {
 
-  StringEquals?: string;
+  StringEquals?: string
 
-  StringLessThan?: string;
+  StringLessThan?: string
 
-  StringGreaterThan?: string;
+  StringGreaterThan?: string
 
-  StringLessThanEquals?: string;
+  StringLessThanEquals?: string
 
-  StringGreaterThanEquals?: string;
+  StringGreaterThanEquals?: string
 
-  NumericEquals?: number;
+  NumericEquals?: number
 
-  NumericLessThan?: number;
+  NumericLessThan?: number
 
-  NumericGreaterThan?: number;
+  NumericGreaterThan?: number
 
-  NumericLessThanEquals?: number;
+  NumericLessThanEquals?: number
 
-  NumericGreaterThanEquals?: number;
+  NumericGreaterThanEquals?: number
 
-  BooleanEquals?: boolean;
+  BooleanEquals?: boolean
 
-  TimestampEquals?: Timestamp;
+  TimestampEquals?: Timestamp
 
-  TimestampLessThan?: Timestamp;
+  TimestampLessThan?: Timestamp
 
-  TimestampGreaterThan?: Timestamp;
+  TimestampGreaterThan?: Timestamp
 
-  TimestampLessThanEquals?: Timestamp;
+  TimestampLessThanEquals?: Timestamp
 
-  TimestampGreaterThanEquals?: Timestamp;
+  TimestampGreaterThanEquals?: Timestamp
 
-  And?: ChoiceRuleCondition[];
+  And?: ChoiceRuleCondition[]
 
-  Or?: ChoiceRuleCondition[];
+  Or?: ChoiceRuleCondition[]
 
-  Not?: ChoiceRuleCondition[];
+  Not?: ChoiceRuleCondition
 }
 
-export default IChoiceState;
+export default IChoiceState
