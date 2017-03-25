@@ -10,7 +10,7 @@ Welcome to stateslang-js! This library was designed to execute state machines de
 
 ## Back to the fundamentals
 
-A **State Machine** is a mathematical model of computation. Programming is messy enough as it is and having a mathematical model through which we can reason about our applications is a very powerful ability. This library encourages you to think about your applications as composable units (or states) with easily understodd upstream and downstream workflows. It encourages functional programming styles & immutability to remove hard to debug issues resulting from side-effects.
+A **State Machine** is a mathematical model of computation. Programming is messy enough as it is and having a mathematical model through which we can reason about our applications is a very powerful ability. This library encourages you to think about your applications as composable units (or states) with easily understood upstream and downstream workflows. It encourages functional programming styles & immutability to remove hard to debug issues resulting from side-effects.
 
 # Developing
 
