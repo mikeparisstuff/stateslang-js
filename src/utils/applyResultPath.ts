@@ -1,5 +1,4 @@
-const set = require('lodash.set');
-const get = require('lodash.get');
+import { lensPath, lensProp, view, set } from 'ramda'
 
 /**
  * https://docs.aws.amazon.com/step-functions/latest/dg/awl-ref-filters.html
@@ -7,16 +6,17 @@ const get = require('lodash.get');
 export default function applyResultPath(
   input: mixed,
   result: mixed,
-  path: string | undefined | null
+  path: string | undefined | null,
 ) {
-  let resultPath = path;
+  let resultPath = path
   // If the path is null return the input
-  if (path === null) return input;
+  if (path === null) return input
   // If the path is undefined (i.e. omitted) default to $
-  if (path === undefined) { resultPath = '$'; }
+  if (path === undefined) { resultPath = '$' }
   const wrappedInput = {
-    '$': input,
-  };
-  set(wrappedInput, resultPath, result);
-  return get(wrappedInput, '$');
+    $: input,
+  }
+  const resLens = lensPath(resultPath!.split('.'))
+  const appliedResult = set(resLens, result, wrappedInput)
+  return view(lensProp('$'), appliedResult)
 }

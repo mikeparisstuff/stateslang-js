@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for states/WaitState.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">All files</a> / <a href="index.html">states</a> WaitState.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">83.02% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>44/53</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">62.5% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>10/16</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>8/8</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">82.69% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>43/52</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import BaseState from './BaseState'
+import { applyInputPath, resolveThunk } from '../utils'
+import StateError from './StateError';
+const debug = require('debug')('WaitState')
+&nbsp;
+type WaitStateConfig&lt;Context&gt; = {
+  Name: string;
+  Next?: Thunk&lt;BaseState&lt;Context&gt;&gt;;
+  End?: boolean;
+  Comment?: string;
+  InputPath?: string;
+  Output<span class="missing-if-branch" title="if path not taken" >I</span>Path?: string;<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+  Seconds?: <span class="cstat-no" title="statement not covered" >number;</span>
+  Timestamp?: Timestamp;
+  SecondsPath?: string;
+  TimestampPath?: string;
+}
+export default class WaitState&lt;Context&gt; extends BaseState&lt;Context&gt; {
+&nbsp;
+  public Type: 'Wait'
+&nbsp;
+  public Next?: Thunk&lt;BaseState&lt;Context&gt;&gt;;
+&nbsp;
+  public End?: boolean
+&nbsp;
+  public Comment?: string
+&nbsp;
+  public InputPath?: string
+&nbsp;
+  public OutputPath?: string
+&nbsp;
+  public Seconds?: number
+&nbsp;
+  public Timestamp?: Timestamp
+<span class="missing-if-branch" title="else path not taken" >E</span>
+  public SecondsPath?: string
+&nbsp;
+  public<span class="cstat-no" title="statement not covered" > TimestampPath?: string</span>
+<span class="cstat-no" title="statement not covered" ></span>
+  constructor(config: WaitS<span class="cstat-no" title="statement not covered" >tateConfig&lt;Context&gt;) {</span>
+    if (!con<span class="cstat-no" title="statement not covered" >fig.End &amp;&amp; !config.Next) {</span>
+      throw new StateError(
+<span class="cstat-no" title="statement not covered" >        'Invalid WaitState',</span>
+        'WaitStates require either End to be set or a Next state',
+      )
+    }
+    super(config.Name)
+    this.Next = config.Next
+    this.End = config.End
+    this.Comment = config.Comment
+    this.InputPath = config.InputPath
+    this.OutputPath = config.OutputPath
+    this.Seconds = config.Seconds
+    this.Timestamp = config.Timestamp
+    this.SecondsPath = config.Se<span class="missing-if-branch" title="else path not taken" >E</span>condsPath
+    this.TimestampPath = config.TimestampPath
+  }
+<span class="cstat-no" title="statement not covered" ></span>
+  private getTimeout(input: mixe<span class="cstat-no" title="statement not covered" >d) {</span>
+    if (this.Seconds) {
+      return this.Seconds * 1000
+    }<span class="cstat-no" title="statement not covered" ></span>
+    if (this.Timestamp) {
+      const waitTill = new Date(this.Timestamp)
+      return waitTill.getTime() - Date.now()
+    }
+    if (this.SecondsPath) {
+      return applyInputPath(input, this.SecondsPath) as number * 1000
+    }
+    if (this.TimestampPath) {
+      const waitTillTimestamp = applyInputPath(input, this.TimestampPath) as string
+      const waitTill = new Date(waitTillTimestamp)
+      return waitTill.getTime() - Date.now()
+    }
+    throw new Error('Could not parse duration for wait state')
+  }
+&nbsp;
+  public async execute(input: mixed, context: Context): Promise&lt;mixed&gt; {
+    const waittime = this.getTimeout(input)
+    const that = this
+    debug(`WaitState waiting for ${waittime} ms`)
+    return new Promise&lt;mixed&gt;(
+      (
+        resolve: (value?: mixed | PromiseLike&lt;mixed&gt; | undefined) =&gt; void,
+        reject: (reason?: mixed) =&gt; void,
+      ) =&gt; {
+        setTimeout(() =&gt; {
+          try {
+            if (that.End) {
+              return resolve(input)
+            }
+            const next = resolveThunk(that.Next!)
+            return resolve(next.execute(input, context))
+          } catch (e) {
+            reject(e)
+          }
+        }, waittime)
+      })
+  }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Mar 27 2017 16:45:45 GMT-0700 (PDT)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

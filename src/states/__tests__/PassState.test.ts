@@ -1,27 +1,14 @@
-import IStateMachine from '../interface/IStateMachine'
-import StateMachine from '../../StateMachine'
+import PassState from '../PassState';
 
-const passMachine: IStateMachine = {
-  StartAt: 'Pass',
-  States: {
-    Pass: {
-      Type: 'Pass',
-      Result: 'World',
-      ResultPath: '$.Hello',
-      Next: 'Done',
-    },
-    Done: {
-      Type: 'Succeed',
-    },
-  },
-}
+type BlankObject = {}
 it('should run the state machine and transform the value through pass', async () => {
-  const e = new StateMachine({
-    stateMachine: passMachine,
-    resources: {},
-    context: {},
+  const pass = new PassState<BlankObject>({
+    Name: 'Pass',
+    Result: 'World',
+    ResultPath: '$.Hello',
+    End: true
   })
-  const result = await e.execute({})
+  const result = await pass.execute({}, {})
   expect(result).toMatchObject({
     Hello: 'World',
   })

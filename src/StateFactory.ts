@@ -1,17 +1,17 @@
 import FailState from './states/FailState'
 import PassState from './states/PassState'
-import ParallelState from './states/ParallelState'
+// import ParallelState from './states/ParallelState'
 import SuccessState from './states/SuccessState'
 import TaskState from './states/TaskState'
 import WaitState from './states/WaitState'
-import ChoiceState from './states/ChoiceState'
+// import ChoiceState from './states/ChoiceState'
 import BaseState from './states/BaseState'
 import StateMachineError from './StateMachineError'
 
-import IStateMachine from './states/interface/IStateMachine'
+import IStateMachine from './interface/IStateMachine'
 import ResourceFn from './ResourceFn'
 
-import IState from './states/interface/IState'
+import IState from './interface/IState'
 
 interface StateFactoryOptions<Context> {
   stateMachine: IStateMachine
@@ -41,22 +41,29 @@ export default class StateFactory<Context> {
         if (!resource) {
           throw new StateMachineError(`StateMachine expected a resource named '${state.Resource}'`)
         }
-        return new TaskState<Context>(name, state, resource)
+        return new TaskState<Context>({ Name: name, Resource: resource })
       case 'Pass':
-        return new PassState<Context>(name, state)
+        return new PassState<Context>({ Name: name })
       case 'Fail':
-        return new FailState<Context>(name, state)
+        return new FailState<Context>({ Name: name, Cause: state.Cause, Error: state.Error })
       case 'Succeed':
-        return new SuccessState<Context>(name, state)
+        return new SuccessState<Context>({ Name: name })
       case 'Parallel':
-        return new ParallelState<Context>(name, state)
+        // return new ParallelState<Context>({ Name: name })
       case 'Wait':
-        return new WaitState<Context>(name, state)
+        return new WaitState<Context>({ Name: name })
       case 'Choice':
-        return new ChoiceState<Context>(name, state)
+        // return new ChoiceState<Context>({ Name: name })
       default:
         throw new StateMachineError('Invalid state type')
     }
+  }
+
+  public addState(name: string, state: IState): void {
+    if (this.States[name]) {
+      throw new StateMachineError(`A state named '${name}' already exists`)
+    }
+    this.States[name] = this.makeState(name, state)
   }
 
   public getState(name: string): BaseState<Context> {
@@ -81,12 +88,10 @@ export default class StateFactory<Context> {
         case 'Task':
         case 'Wait':
         case 'Pass':
-          if (state.Next) {
-            const next = this.getState(state.Next)
-            state.setNextState(next)
-          }
           break
         case 'Choice':
+          // We need to wire up ChoiceRules with their next states
+          break
         case 'Parallel':
         case 'Fail':
         case 'Succeed':

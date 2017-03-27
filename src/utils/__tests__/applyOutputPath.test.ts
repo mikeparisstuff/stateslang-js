@@ -11,7 +11,7 @@ test('Should grab entire output', () => {
 test('Should return empty object with null path', () => {
   const applied = applyOutputPath(
     { Hello: 'World' },
-    null
+    null,
   );
   expect(applied).toMatchObject({});
 })
@@ -19,7 +19,7 @@ test('Should return empty object with null path', () => {
 test('Should return empty object with undefined path', () => {
   const applied = applyOutputPath(
     { Hello: 'World' },
-    undefined
+    undefined,
   );
   expect(applied).toMatchObject({ Hello: 'World' });
 })

@@ -1,5 +1,5 @@
 import BaseState from './states/BaseState'
-import IStateMachine from './states/interface/IStateMachine'
+import IStateMachine from './interface/IStateMachine'
 import StateFactory from './StateFactory'
 import ResourceFn from './ResourceFn'
 const debug = require('debug')('StateMachine')

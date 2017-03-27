@@ -1,4 +1,4 @@
-import IRetrier from './interface/IRetrier'
+import IRetrier from '../interface/IRetrier'
 
 export default class Retrier implements IRetrier {
 

@@ -1,9 +1,13 @@
-import IFailState from './interface/IFailState'
-import IExecutable from './interface/IExecutable'
+import IExecutable from '../interface/IExecutable'
 import StateError from './StateError'
 import BaseState from './BaseState'
 const debug = require('debug')('FailState')
 
+type FailStateConfig = {
+  Name: string;
+  Cause: string;
+  Error: string;
+}
 export default class FailState<Context> extends BaseState<Context> implements IExecutable<Context> {
 
   public Type: 'Fail'
@@ -12,9 +16,11 @@ export default class FailState<Context> extends BaseState<Context> implements IE
 
   public Error: string
 
-  constructor(name: string, state: IFailState) {
-    super(name)
-    Object.assign(this, state)
+  constructor(config: FailStateConfig) {
+    super(config.Name)
+    this.Type = 'Fail'
+    this.Cause = config.Cause
+    this.Error = config.Error
   }
 
   public execute(): Promise<mixed> {

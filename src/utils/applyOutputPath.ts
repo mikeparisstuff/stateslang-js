@@ -1,11 +1,11 @@
-const get = require('lodash.get')
+import { lensPath, view } from 'ramda'
 
 /**
  * https://docs.aws.amazon.com/step-functions/latest/dg/awl-ref-filters.html
  */
 export default function applyOutputPath(
   result: mixed,
-  path: string | undefined | null
+  path: string | undefined | null,
 ) {
   let outputPath = path
   // If the path is null return the input
@@ -15,5 +15,6 @@ export default function applyOutputPath(
   const wrappedInput = {
     $: result,
   }
-  return get(wrappedInput, outputPath)
+  const lens = lensPath(outputPath!.split('.'))
+  return view(lens, wrappedInput)
 }

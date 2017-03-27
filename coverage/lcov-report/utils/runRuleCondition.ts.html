@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for utils/runRuleCondition.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">All files</a> / <a href="index.html">utils</a> runRuleCondition.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">89.74% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>35/39</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">82.61% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>19/23</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>4/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">89.47% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>34/38</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64</td><td class="line-coverage quiet"><span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">46x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span></td><td class="text"><pre class="prettyprint lang-js">import { RuleOperator } from '../interface/IChoiceState';
+&nbsp;
+function expectString(val: mixed) {
+  if<span class="missing-if-branch" title="if path not taken" >I</span> (typeof val !== 'string') throw new Error('Expected value of type string')
+}<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+function expectNumber(val: mixed) {
+  if<span class="missing-if-branch" title="if path not taken" >I</span> (typeof val !== 'number') throw new Error('Expected value of type number')
+}<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+function expectBoolean(val: mixed) {
+  if<span class="missing-if-branch" title="if path not taken" >I</span> (typeof val !== 'boolean') throw new Error('Expected value of type boolean')
+}<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+export default function runRuleCondition(operation: RuleOperator, value: mixed, expect: mixed): boolean {
+  switch(operation) {
+    case 'StringEquals':
+      expectString(value)
+      return expect === value
+    case 'StringLessThan':
+      expectString(value)
+      return value! &lt; expect!
+    case 'StringGreaterThan':
+      expectString(value)
+      return value! &gt; expect!
+    case 'StringLessThanEquals':
+      expectString(value)
+      return value! &lt;= expect!
+    case 'StringGreaterThanEquals':
+      expectString(value)
+      return value! &gt;= expect!
+    case 'NumericEquals':
+      expectNumber(value)
+      return value! === expect!
+    case 'NumericLessThan':
+      expectNumber(value)
+      return value! &lt; expect!
+    case 'NumericGreaterThan':
+      expectNumber(value)
+      return value! &gt; expect!
+    case 'NumericLessThanEquals':
+      expectNumber(value)
+      return value! &lt;= expect!
+    case 'NumericGreaterThanEquals':
+      expectNumber(value)
+      return value! &gt;= expect!
+    case 'BooleanEquals':
+      expectBoolean(value)
+      return value! === expect!
+    case 'TimestampEquals':
+      return new Date(value as string).getTime() === new Date(expect as string).getTime()
+    case 'TimestampLessThan':
+      return new Date(value as string).getTime() &lt; new Date(expect as string).getTime()
+    case 'TimestampGreaterThan':
+      return new Date(value as string).getTime() &gt; new Date(expect as string).getTime()
+    case 'TimestampLessThanEquals':
+      return new Date(value as string).getTime() &lt;= new Date(expect as string).getTime()
+    case 'TimestampGreaterThanEquals':
+      return new Date(value as string).getTime() &gt;= new Date(expect as string).getTime()
+    defa<span class="branch-16 cbranch-no" title="branch not covered" >ult:</span>
+      return<span class="cstat-no" title="statement not covered" > false</span>
+  }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Mar 27 2017 16:45:45 GMT-0700 (PDT)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

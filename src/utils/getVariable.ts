@@ -1,11 +1,11 @@
-const get = require('lodash.get')
+import { lensPath, view } from 'ramda'
 
 export default function getVariable(
   input: mixed,
-  path: string | undefined | null,
+  path = '',
 ) {
   const wrappedInput = {
     $: input,
   }
-  return get(wrappedInput, path, null)
+  return view(lensPath(path.split('.')), wrappedInput)
 }

@@ -13,7 +13,7 @@ interface IChoiceState extends IBaseState {
    * An array of Choice Rules that determine which state the state machine transitions to next.
    * [Required]
    */
-  Choices: ChoiceRule[]
+  Choices: IChoiceRule[]
 
   /**
    * The name of a state to transition to if none of the transitions in Choices is taken.
@@ -28,15 +28,15 @@ interface IChoiceState extends IBaseState {
  * specify an input variable to be compared, the type of comparison and the value with which to
  * compare it) and a Next field, whose value must match a state name in the state machine.
  */
-export interface ChoiceRule extends ChoiceRuleCondition {
+export interface IChoiceRule extends IChoiceRuleCondition {
 
   Next: string
 
 }
 
-export interface ChoiceRuleCondition extends ChoiceRuleOperators {
+export interface IChoiceRuleCondition extends IChoiceRuleOperators {
 
-  Variable?: string
+  Variable: string
 
 }
 
@@ -66,7 +66,7 @@ export type RuleOperator = 'StringEquals'
  * field to a string value. However, since Timestamp fields are logically strings, it is possible
  * that a field that is thought of as a time-stamp could be matched by a "StringEquals" comparator.
  */
-interface ChoiceRuleOperators {
+interface IChoiceRuleOperators {
 
   StringEquals?: string
 
@@ -100,11 +100,11 @@ interface ChoiceRuleOperators {
 
   TimestampGreaterThanEquals?: Timestamp
 
-  And?: ChoiceRuleCondition[]
+  And?: IChoiceRuleCondition[]
 
-  Or?: ChoiceRuleCondition[]
+  Or?: IChoiceRuleCondition[]
 
-  Not?: ChoiceRuleCondition
+  Not?: IChoiceRuleCondition
 }
 
 export default IChoiceState

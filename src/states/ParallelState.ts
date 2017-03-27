@@ -1,4 +1,4 @@
-import IParallelState from './interface/IParallelState'
+import IParallelState from '../interface/IParallelState'
 import StateMachine from '../StateMachine'
 import Retrier from './Retrier'
 import Catcher from './Catcher'

@@ -1,4 +1,4 @@
-import ICatcher from './interface/ICatcher'
+import ICatcher from '../interface/ICatcher'
 
 export default class Catcher implements ICatcher {
 

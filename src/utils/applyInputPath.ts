@@ -1,9 +1,9 @@
-const get = require('lodash.get')
+import { lensPath, view } from 'ramda'
 
 export default function applyInputPath(
   input: mixed,
-  path: string | undefined | null
-) {
+  path: string | undefined | null,
+): mixed {
   let inputPath = path
   // If the path is null
   if (path === null) return {}
@@ -12,5 +12,6 @@ export default function applyInputPath(
   const wrappedInput = {
     $: input,
   }
-  return get(wrappedInput, inputPath)
+  const lens = lensPath(inputPath!.split('.'))
+  return view(lens, wrappedInput)
 }

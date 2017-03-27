@@ -1,18 +1,18 @@
 import BaseState from './BaseState'
-import ISuccessState from './interface/ISuccessState'
-import noop from '../utils/noop'
 
+type SuccessStateConfig = {
+  Name: string;
+}
 export default class SuccessState<Context> extends BaseState<Context> {
 
   public Type: 'Succeed'
 
-  constructor(name: string, state: ISuccessState) {
-    super(name)
-    Object.assign(this, state)
+  constructor(config: SuccessStateConfig) {
+    super(config.Name)
+    this.Type = 'Succeed'
   }
 
-  public execute(input: mixed, context: Context): Promise<mixed> {
-    noop(context)
+  public execute(input: mixed): Promise<mixed> {
     return Promise.resolve(input)
   }
 }

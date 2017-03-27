@@ -1,21 +1,29 @@
-import IWaitState from './interface/IWaitState'
 import BaseState from './BaseState'
-import { applyInputPath } from '../utils'
+import { applyInputPath, resolveThunk } from '../utils'
+import StateError from './StateError';
 const debug = require('debug')('WaitState')
 
+type WaitStateConfig<Context> = {
+  Name: string;
+  Next?: Thunk<BaseState<Context>>;
+  End?: boolean;
+  Comment?: string;
+  InputPath?: string;
+  OutputPath?: string;
+  Seconds?: number;
+  Timestamp?: Timestamp;
+  SecondsPath?: string;
+  TimestampPath?: string;
+}
 export default class WaitState<Context> extends BaseState<Context> {
 
   public Type: 'Wait'
 
-  public Next?: string
-
-  protected NextState?: BaseState<Context>
+  public Next?: Thunk<BaseState<Context>>;
 
   public End?: boolean
 
   public Comment?: string
-
-  public Resource: string
 
   public InputPath?: string
 
@@ -29,9 +37,23 @@ export default class WaitState<Context> extends BaseState<Context> {
 
   public TimestampPath?: string
 
-  constructor(name: string, state: IWaitState) {
-    super(name)
-    Object.assign(this, state)
+  constructor(config: WaitStateConfig<Context>) {
+    if (!config.End && !config.Next) {
+      throw new StateError(
+        'Invalid WaitState',
+        'WaitStates require either End to be set or a Next state',
+      )
+    }
+    super(config.Name)
+    this.Next = config.Next
+    this.End = config.End
+    this.Comment = config.Comment
+    this.InputPath = config.InputPath
+    this.OutputPath = config.OutputPath
+    this.Seconds = config.Seconds
+    this.Timestamp = config.Timestamp
+    this.SecondsPath = config.SecondsPath
+    this.TimestampPath = config.TimestampPath
   }
 
   private getTimeout(input: mixed) {
@@ -43,10 +65,10 @@ export default class WaitState<Context> extends BaseState<Context> {
       return waitTill.getTime() - Date.now()
     }
     if (this.SecondsPath) {
-      return applyInputPath(input, this.SecondsPath) * 1000
+      return applyInputPath(input, this.SecondsPath) as number * 1000
     }
     if (this.TimestampPath) {
-      const waitTillTimestamp = applyInputPath(input, this.TimestampPath)
+      const waitTillTimestamp = applyInputPath(input, this.TimestampPath) as string
       const waitTill = new Date(waitTillTimestamp)
       return waitTill.getTime() - Date.now()
     }
@@ -64,7 +86,11 @@ export default class WaitState<Context> extends BaseState<Context> {
       ) => {
         setTimeout(() => {
           try {
-            return resolve(that.gotoNextState(input, context))
+            if (that.End) {
+              return resolve(input)
+            }
+            const next = resolveThunk(that.Next!)
+            return resolve(next.execute(input, context))
           } catch (e) {
             reject(e)
           }
