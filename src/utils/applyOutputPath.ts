@@ -6,7 +6,7 @@ import { lensPath, view } from 'ramda'
 export default function applyOutputPath(
   result: mixed,
   path: string | undefined | null,
-) {
+): mixed {
   let outputPath = path
   // If the path is null return the input
   if (path === null) return {}

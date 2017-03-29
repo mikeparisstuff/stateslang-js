@@ -3,7 +3,7 @@ import Catcher from '../interface/ICatcher'
 import BaseState from './BaseState'
 import ResourceFn from '../ResourceFn'
 import StateError from './StateError'
-import resolveThunk from '../utils/resolveThunk';
+import resolveThunk from '../utils/resolveThunk'
 import {
   applyInputPath,
   applyOutputPath,

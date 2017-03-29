@@ -1,4 +1,4 @@
-import WaitState from '../WaitState';
+import WaitState from '../WaitState'
 
 type BlankObject = {}
 it('should run the state machine and get the value after 3 seconds', async () => {

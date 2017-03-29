@@ -7,7 +7,7 @@ export default function applyResultPath(
   input: mixed,
   result: mixed,
   path: string | undefined | null,
-) {
+): mixed {
   let resultPath = path
   // If the path is null return the input
   if (path === null) return input

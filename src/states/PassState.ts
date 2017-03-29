@@ -5,7 +5,7 @@ import {
   applyResultPath,
   resolveThunk,
 } from '../utils'
-import StateError from './StateError';
+import StateError from './StateError'
 
 type PassStateConfig<Context> = {
   Name: string;
@@ -21,7 +21,7 @@ export default class PassState<Context> extends BaseState<Context> {
 
   public Type: 'Pass'
 
-  public Next?: Thunk<BaseState<Context>>;
+  public Next?: Thunk<BaseState<Context>>
 
   public End?: boolean
 

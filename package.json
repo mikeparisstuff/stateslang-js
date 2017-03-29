@@ -28,6 +28,7 @@
     "build": "./scripts/build",
     "dev": "./scripts/dev",
     "lint": "./scripts/lint",
+    "ci": "./scripts/ci",
     "test": "jest",
     "coverage": "jest --coverage"
   },

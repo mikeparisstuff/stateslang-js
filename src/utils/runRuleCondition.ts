@@ -1,19 +1,19 @@
-import { RuleOperator } from '../interface/IChoiceState';
+import { RuleOperator } from '../interface/IChoiceState'
 
-function expectString(val: mixed) {
+function expectString(val: mixed): void {
   if (typeof val !== 'string') throw new Error('Expected value of type string')
 }
 
-function expectNumber(val: mixed) {
+function expectNumber(val: mixed): void {
   if (typeof val !== 'number') throw new Error('Expected value of type number')
 }
 
-function expectBoolean(val: mixed) {
+function expectBoolean(val: mixed): void {
   if (typeof val !== 'boolean') throw new Error('Expected value of type boolean')
 }
 
 export default function runRuleCondition(operation: RuleOperator, value: mixed, expect: mixed): boolean {
-  switch(operation) {
+  switch (operation) {
     case 'StringEquals':
       expectString(value)
       return expect === value

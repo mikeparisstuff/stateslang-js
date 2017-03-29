@@ -1,14 +1,14 @@
-import applyInputPath from '../applyInputPath';
+import applyInputPath from '../applyInputPath'
 
 it('should pull out World', () => {
   const applied = applyInputPath({ Hello: 'World' }, '$.Hello')
   expect(applied).toBe('World')
-});
+})
 
 it('should pull out nested World', () => {
   const applied = applyInputPath({ Hello: { Good: 'World' } }, '$.Hello.Good')
   expect(applied).toBe('World')
-});
+})
 
 it('should grab the whole object', () => {
   const applied = applyInputPath({ Hello: 'World' }, '$')

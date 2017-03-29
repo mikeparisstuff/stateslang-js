@@ -73,7 +73,7 @@ class ChoiceRuleCondition {
   public Not?: ChoiceRuleCondition
 
   constructor(
-    config: RuleConditionConfig
+    config: RuleConditionConfig,
   ) {
     Object.assign(this, config)
   }

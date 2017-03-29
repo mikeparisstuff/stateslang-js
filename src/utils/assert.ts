@@ -5,6 +5,6 @@ class AssertionError extends Error {
   }
 }
 
-export default function assert(value: mixed, message: string) {
+export default function assert(value: mixed, message: string): void {
   if (!value) throw new AssertionError(message)
 }

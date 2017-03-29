@@ -1,5 +1,5 @@
-import TaskState from '../TaskState';
-import noop from '../../utils/noop';
+import TaskState from '../TaskState'
+import noop from '../../utils/noop'
 
 type BlankObject = {}
 it('should run the state machine and transform the value through task', async () => {
@@ -12,7 +12,7 @@ it('should run the state machine and transform the value through task', async ()
   })
   const result = await task.execute({}, {})
   expect(result).toMatchObject({
-    Hello: 'World'
+    Hello: 'World',
   })
 })
 

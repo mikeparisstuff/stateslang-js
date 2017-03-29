@@ -1,4 +1,4 @@
-import PassState from '../PassState';
+import PassState from '../PassState'
 
 type BlankObject = {}
 it('should run the state machine and transform the value through pass', async () => {
@@ -6,7 +6,7 @@ it('should run the state machine and transform the value through pass', async ()
     Name: 'Pass',
     Result: 'World',
     ResultPath: '$.Hello',
-    End: true
+    End: true,
   })
   const result = await pass.execute({}, {})
   expect(result).toMatchObject({

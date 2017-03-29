@@ -2,7 +2,10 @@ import BaseState from './states/BaseState'
 import IStateMachine from './interface/IStateMachine'
 import StateFactory from './StateFactory'
 import ResourceFn from './ResourceFn'
+
+/* tslint:disable */
 const debug = require('debug')('StateMachine')
+/* tslint:enable */
 
 interface StateMachineOptions<Context> {
   stateMachine: IStateMachine
@@ -42,10 +45,10 @@ export default class StateMachine<Context> {
     const factory = new StateFactory({
       stateMachine,
       resources,
-    });
+    })
     this.States = Object.keys(stateMachine.States).reduce((
       acc: {[name: string]: BaseState<Context>},
-      key: string
+      key: string,
     ) => ({
       ...acc,
       [key]: factory.getState(key),
@@ -68,7 +71,7 @@ export default class StateMachine<Context> {
 
   public validate(): boolean {
     debug('Validating State Machine', this)
-    return true;
+    return true
   }
 
   public execute(input: mixed): Promise<mixed> {

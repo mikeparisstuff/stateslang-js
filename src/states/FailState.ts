@@ -1,7 +1,10 @@
 import IExecutable from '../interface/IExecutable'
 import StateError from './StateError'
 import BaseState from './BaseState'
+
+/* tslint:disable */
 const debug = require('debug')('FailState')
+/* tslint:enable */
 
 type FailStateConfig = {
   Name: string;

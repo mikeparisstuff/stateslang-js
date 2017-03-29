@@ -39,7 +39,7 @@ it('should run the state machine and transform the value through task', async ()
   const choiceState = new ChoiceState<BlankObject>({
     Name: 'ChoiceState',
     Choices: [rule1, rule2],
-    Default: defTask
+    Default: defTask,
   })
 
   const result = await choiceState.execute({ option: 'option1' }, {})
@@ -52,7 +52,7 @@ it('should run the state machine and transform the value through task', async ()
   const choiceState = new ChoiceState<BlankObject>({
     Name: 'ChoiceState',
     Choices: [rule1, rule2],
-    Default: defTask
+    Default: defTask,
   })
 
   const result = await choiceState.execute({ option: 'option2' }, {})
@@ -65,7 +65,7 @@ it('should run the state machine and transform the value through task', async ()
   const choiceState = new ChoiceState<BlankObject>({
     Name: 'ChoiceState',
     Choices: [rule1, rule2],
-    Default: defTask
+    Default: defTask,
   })
 
   const result = await choiceState.execute({ option: 'option3' }, {})

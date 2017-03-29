@@ -27,10 +27,12 @@ export default class StateFactory<Context> {
   }
 
   constructor(private options: StateFactoryOptions<Context>) {
+    /* tslint:disable */
     this.States = Object.keys(options.stateMachine.States).reduce((acc: any, key: string) => ({
       ...acc,
       [key]: this.makeState(key, options.stateMachine.States[key]),
     }), {})
+    /* tslint:enable */
     this.makeTransitions()
   }
 

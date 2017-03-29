@@ -34,7 +34,7 @@ interface IStateMachine {
    * This field's value is an object containing a comma-delimited set of Istates. [Required]
    */
   States: {
-    [name: string]: IState
+    [name: string]: IState,
   }
 }
 

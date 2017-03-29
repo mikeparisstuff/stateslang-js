@@ -1,7 +1,10 @@
 import BaseState from './BaseState'
 import { applyInputPath, resolveThunk } from '../utils'
-import StateError from './StateError';
+import StateError from './StateError'
+
+/* tslint:disable */
 const debug = require('debug')('WaitState')
+/* tslint:enable */
 
 type WaitStateConfig<Context> = {
   Name: string;
@@ -19,7 +22,7 @@ export default class WaitState<Context> extends BaseState<Context> {
 
   public Type: 'Wait'
 
-  public Next?: Thunk<BaseState<Context>>;
+  public Next?: Thunk<BaseState<Context>>
 
   public End?: boolean
 
@@ -56,7 +59,7 @@ export default class WaitState<Context> extends BaseState<Context> {
     this.TimestampPath = config.TimestampPath
   }
 
-  private getTimeout(input: mixed) {
+  private getTimeout(input: mixed): number {
     if (this.Seconds) {
       return this.Seconds * 1000
     }
