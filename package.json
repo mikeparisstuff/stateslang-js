@@ -1,6 +1,6 @@
 {
   "name": "stateslang-js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "An implementation and execution engine for the Amazon States Language written in Typescript.",
   "author": "Michael Paris <michael@scaphold.io>",
   "license": "MIT",
