@@ -1,7 +1,7 @@
 {
   "name": "stateslang-js",
   "version": "0.0.1",
-  "description": "An extension of the Amazon States Language that includes static typing and validation",
+  "description": "An implementation and execution engine for the Amazon States Language written in Typescript.",
   "author": "Michael Paris <michael@scaphold.io>",
   "license": "MIT",
   "homepage": "https://scaphold.io",
@@ -14,11 +14,12 @@
   },
   "keywords": [
     "stateslang",
+    "javascript",
     "typescript",
     "graphql",
     "static",
     "amazon",
-    "scaphold",
+    "npm",
     "microservices"
   ],
   "main": "build/index.js",
